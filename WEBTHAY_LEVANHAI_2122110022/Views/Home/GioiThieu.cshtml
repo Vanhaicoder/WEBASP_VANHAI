@@ -1,0 +1,115 @@
+﻿
+@{
+    ViewBag.Title = "GioiThieu";
+}
+<style>
+    .map-container {
+        margin: 0 auto;
+        max-width: 100%; /* Đảm bảo bản đồ chiếm toàn bộ chiều rộng của cột */
+    }
+
+    .col-md-4 {
+        padding: 15px;
+       
+    }
+
+        .col-md-4 div {
+            margin-bottom: 10px;
+        }
+    .oooo{
+        margin-top : 20px
+    }
+
+</style>
+<body>
+    <section class="oooo">
+        <div class="container">
+            <h2 class="title-page">Giới thiệu VanhaiStudio</h2>
+        </div> <!-- container .// -->
+    </section>
+    <section class="section-content bg-white padding-y">
+        <div class="container">
+            <p>
+                VanHaiStudio. hướng đến hình ảnh một thương hiệu cung cấp các sản phẩm thời trang ứng dụng hằng ngày dành cho giới trẻ, mang đến trải nghiệm sản phẩm và dịch vụ với tiêu chuẩn tốt nhất.
+                Chúng tôi tập trung vào việc sử dụng những chất liệu thông dụng như Jeans,
+                Thun, Nỉ, Chất liệu gió nhưng vẫn mang màu sắc tươi mới, thân thiện với môi trường và liên tục phát triển về công nghệ sản phẩm.
+            </p>
+            <img src="" alt="">
+            <img src="~/Content/images/chinhsach/NGANG.jpg" />
+
+            <div class="row text-center py-3">
+                <!-- Cột chứa thông tin địa chỉ -->
+                <aside class="col-md-4 col-12" style=" text-align:left">
+                    <article class="mr-md-4">
+                        <h5 class="title">Về chúng tôi</h5>
+                        <p>VanhaiStudio có đầy đủ các loại thời trang, kết hợp với nhiều Brand nổi tiếng đem đến chất lượng sản phẩm.</p>
+                        <ul class="list-icon">
+                            <li> <i class="icon fa fa-map-marker"> </i>212 Tăng Nhơn Phú, Phước Long B, Quận 9, Thành phố Thủ Đức </li>
+                            <li> <i class="icon fa fa-envelope"> </i> Vanhaistudio@gmail.com</li>
+                            <li> <i class="icon fa fa-phone"> </i> (84) 098-148-7674</li>
+                            <li> <i class="icon fa fa-clock"> </i>Các ngày trong tuần 10:00pm - 7:00pm</li>
+                        </ul>
+                    </article>
+                </aside>
+
+                <!-- Cột chứa bản đồ Google Maps -->
+                <div class="col-md-4">
+                    <div class="map-container">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.386961545225!2d106.67629201462349!3d10.77978339231998!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3175292a1d6c9e43%3A0xaef2b858ceaf8252!2zMzc3IMSQIFAuIFN1IFbhuqFuIEjhuqFuaCwgUGjGsOG7nW5nIDEyLCBRdeG6rW4gMTAsIEjDsmEgQ8O0IE1pbmggNzAwMDA!5e0!3m2!1svi!2s!4v1626373246010!5m2!1svi!2s"
+                                width="100%"
+                                height="250"
+                                style="border:0;"
+                                allowfullscreen=""
+                                loading="lazy">
+                        </iframe>
+                    </div>
+                </div>
+
+                <!-- Cột chứa thông tin liên hệ -->
+                <aside class="col-md-4 col-12" style=" text-align:left">
+                    <h5 class="title">Follow us on social media</h5>
+                    <div>
+                        <a href="#" class="btn btn-icon btn-light"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="btn btn-icon btn-light"><i class="fab fa-instagram"></i></a>
+                    </div>
+
+                    <p style="margin-top:10px">Góp ý với VanHaiStudio về trải nghiệm của bạn nhé ?</p>
+
+                    <form class="form-inline mb-3">
+                        <input type="text" placeholder="Email" class="form-control" name="">
+                        <button class="btn ml-2 btn-warning"> Subscribe</button>
+                    </form>
+
+
+
+                </aside>
+            </div>
+            <div class="row text-center py-3">
+                <div class="col-md-4">
+                    <i class="fas fa-truck fa-2x"></i>
+                    <div><strong>GIAO HÀNG </strong></div>
+                    <div><a href="tel:0981487674">098 1487 674 Toàn quốc</a></div>
+                </div>
+                <div class="col-md-4">
+                    <i class="fas fa-sync-alt fa-2x"></i>
+                    <div><strong>ĐỔI HÀNG - BẢO HÀNH</strong></div>
+                    <div><a href="tel:0981487674">098 1487 674 để được hỗ trợ</a></div>
+                </div>
+                <div class="col-md-4">
+                    <i class="fas fa-headset fa-2x"></i>
+                    <div><strong>HỖ TRỢ / GÓP Ý / KHIẾU NẠI DỊCH VỤ</strong></div>
+                    <div><a href="tel:0981487674">098 1487 674</a></div>
+                    <div><a href="tel:0123456789">012 345 678 9</a></div>
+                </div>
+            </div>
+            <br><br>
+
+            <a href="@Url.Action("Index","Home")" class="btn btn-light"> &laquo Quay lại trang chủ</a>
+        </div> <!-- container .//  -->
+    </section>
+
+    <!-- ========================= SECTION CONTENT END// ========================= -->
+</body>
+
+
+

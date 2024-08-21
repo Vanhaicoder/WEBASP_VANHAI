@@ -8,6 +8,37 @@
 
 
 </head>
+
+<script>
+    function updateTimer() {
+        // Thay đổi giá trị ngày, giờ, phút và giây để phù hợp với thời gian đếm ngược của bạn
+        const endDate = new Date('2024-08-20T00:00:00'); // Thay đổi ngày giờ kết thúc
+
+        const now = new Date();
+        const timeRemaining = endDate - now;
+
+        if (timeRemaining <= 0) {
+            document.getElementById('days').innerText = '00';
+            document.getElementById('hours').innerText = '00';
+            document.getElementById('minutes').innerText = '00';
+            document.getElementById('seconds').innerText = '00';
+            return; // Thoát khỏi hàm khi thời gian kết thúc
+        }
+
+        const seconds = Math.floor((timeRemaining / 1000) % 60);
+        const minutes = Math.floor((timeRemaining / (1000 * 60)) % 60);
+        const hours = Math.floor((timeRemaining / (1000 * 60 * 60)) % 24);
+        const days = Math.floor(timeRemaining / (1000 * 60 * 60 * 24));
+
+        document.getElementById('days').innerText = String(days).padStart(2, '0');
+        document.getElementById('hours').innerText = String(hours).padStart(2, '0');
+        document.getElementById('minutes').innerText = String(minutes).padStart(2, '0');
+        document.getElementById('seconds').innerText = String(seconds).padStart(2, '0');
+    }
+
+    setInterval(updateTimer, 1000); // Cập nhật đồng hồ mỗi giây
+</script>
+
 <body>
     <div class="container">
         <!-- ========================= SECTION MAIN  ========================= -->
@@ -17,17 +48,18 @@
 
                     <div class="row">
                         <aside class="col-lg col-md-3 flex-lg-grow-0">
-                            <h6>MY MARKETS</h6>
+                            <h6>Chính sách</h6>
                             <nav class="nav-home-aside">
                                 <ul class="menu-category">
-                                    <li><a href="#">Fashion and clothes</a></li>
-                                    <li><a href="#">Automobile and motors</a></li>
-                                    <li><a href="#">Gardening and agriculture</a></li>
-                                    <li><a href="#">Electronics and tech</a></li>
-                                    <li><a href="#">Packaginf and printing</a></li>
-                                    <li><a href="#">Home and kitchen</a></li>
-                                    <li><a href="#">Digital goods</a></li>
-                                    <li class="has-submenu">
+                                    <li> <a href="@Url.Action("GioiThieu", "Home")">Giới thiệu</a></li>
+                                    <li> <a href="@Url.Action("ChinhSachDoiTra", "Home")">Chính sách đổi trả</a></li>
+                                    <li><a href="@Url.Action("ChinhSachNhanChuyen", "Home")">Chính sách nhận chuyển</a></li>
+                                    <li><a href="@Url.Action("DieuKhoanDichVu", "Home")">Điều khoản dịch vụ</a></li>
+                                    <li> <a href="@Url.Action("ChinhSachBaoMat", "Home")">Chính sách bảo mật</a></li>
+                                    <li> <a href="@Url.Action("HuongDanMuaHang", "Home")">Hướng dẫn mua hàng</a></li>
+                                    <li> <a href="@Url.Action("ChinhSachSuDungWeb", "Home")">Chính sách sử dụng web</a></li>
+
+                                    @*<li class="has-submenu">
                                         <a href="#">More items</a>
                                         <ul class="submenu">
                                             <li><a href="#">Submenu name</a></li>
@@ -35,7 +67,7 @@
                                             <li><a href="#">Another menu</a></li>
                                             <li><a href="#">Some others</a></li>
                                         </ul>
-                                    </li>
+                                    </li>*@
                                 </ul>
                             </nav>
                         </aside> <!-- col.// -->
@@ -101,15 +133,16 @@
             <div class="card card-deal">
                 <div class="col-heading content-body">
                     <header class="section-heading">
-                        <h3 class="section-title">Deals and offers</h3>
-                        <p>Hygiene equipments</p>
+                        <h3 class="section-title">Ưu đãi và khuyến mại</h3>
+                        <p>Sản phẩm đang sale</p>
                     </header><!-- sect-heading -->
                     <div class="timer">
-                        <div> <span class="num">04</span> <small>Days</small></div>
-                        <div> <span class="num">12</span> <small>Hours</small></div>
-                        <div> <span class="num">58</span> <small>Min</small></div>
-                        <div> <span class="num">02</span> <small>Sec</small></div>
+                        <div><span class="num" id="days">04</span> <small>Days</small></div>
+                        <div><span class="num" id="hours">12</span> <small>Hours</small></div>
+                        <div><span class="num" id="minutes">58</span> <small>Min</small></div>
+                        <div><span class="num" id="seconds">02</span> <small>Sec</small></div>
                     </div>
+
                 </div> <!-- col.// -->
 
                 @foreach (var item in Model.ListProduct.Where(c => c.Status == 1).OrderByDescending(c => c.Id).Take(5))
@@ -149,24 +182,24 @@
                         </div>
 
                     </div> <!-- col.// -->
-                    
-                        <div class="col-md-9">
-                            <ul class="row no-gutters bordered-cols">
-                                @foreach (var item in Model.ListProduct.Where(c => c.HotP == 1).OrderByDescending(c => c.Id).Take(8))
-                                {
-                                    <li class="col-6 col-lg-3 col-md-4">
-                                        <a href="@Url.Action("Detail", "Home", new { item.Id},null)" class="item">
-                                            <div class="card-body">
-                                                <h6 class="title">@item.Description</h6>
-                                                <img class="img-sm float-right" src="~/Content/images/items/@item.Image">
-                                                <p class="text-muted"><i class="fa fa-store"></i> @item.Brand.Name</p>
-                                            </div>
-                                        </a>
-                                    </li>
-                                }
-                                </ul>
-                        </div> <!-- col.// -->
-                    
+
+                    <div class="col-md-9">
+                        <ul class="row no-gutters bordered-cols">
+                            @foreach (var item in Model.ListProduct.Where(c => c.HotP == 1).OrderByDescending(c => c.Id).Take(8))
+                            {
+                                <li class="col-6 col-lg-3 col-md-4">
+                                    <a href="@Url.Action("Detail", "Home", new { item.Id},null)" class="item">
+                                        <div class="card-body">
+                                            <h6 class="title">@item.Description</h6>
+                                            <img class="img-sm float-right" src="~/Content/images/items/@item.Image">
+                                            <p class="text-muted"><i class="fa fa-store"></i> @item.Brand.Name</p>
+                                        </div>
+                                    </a>
+                                </li>
+                            }
+                        </ul>
+                    </div> <!-- col.// -->
+
 
                 </div> <!-- row.// -->
             </div> <!-- card.// -->
@@ -185,7 +218,7 @@
                         <div class="home-category-banner bg-light-orange">
                             <h5 class="title">Tạo sự Nổi bật - Dễ phối, Sang trọng</h5>
                             <p>Định vị sự khác biệt đến từ những chiếc Phụ kiện đi kèm đời thường hằng ngày. </p>
-                            <a href="@Url.Action("Detail","Product")" class="btn btn-outline-primary rounded-pill">Xem ngay</a>
+                            <a href="" class="btn btn-outline-primary rounded-pill">Xem ngay</a>
                             <img src="~/Content/images/items/balo1.jpg" class="img-bg">
                         </div>
 
@@ -211,61 +244,63 @@
                 </div> <!-- row.// -->
             </div> <!-- card.// -->
         </section>
+
         <!-- =============== SECTION 2 END =============== -->
         <!-- =============== SECTION REQUEST =============== -->
 
         <section class="padding-bottom">
 
             <header class="section-heading heading-line">
-                <h4 class="title-section text-uppercase">Request for Quotation</h4>
+                <h4 class="title-section text-uppercase">YÊU CẦU HỖ TRỢ</h4>
             </header>
 
             <div class="row">
                 <div class="col-md-8">
                     <div class="card-banner banner-quote overlay-gradient" style="background-image: url('~/Content/images/banners/banner9.jpg');">
                         <div class="card-img-overlay white">
-                            <h3 class="card-title">An easy way to send request to suppliers</h3>
+                            <h3 class="card-title">Gửi yêu cầu đến VanHai Studio một cách dễ dàng ?</h3>
                             <p class="card-text" style="max-width: 400px">
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                                tempor incididunt.
+                                Chúng tôi luôn đồng hành và hỗ trợ các bạn mọi lúc, đừng ngại gửi yêu cầu
+                                để chúng tôi hiểu bạn hơn nhé.
                             </p>
-                            <a href="" class="btn btn-primary rounded-pill">Learn more</a>
+                            <a href="">Chính sách sử dụng website</a>
+                            <a href="@Url.Action("ChinhSachSuDungWeb", "Home")" class="btn btn-primary rounded-pill">Xem ngay</a>
                         </div>
                     </div>
                 </div> <!-- col // -->
                 <div class="col-md-4">
 
                     <div class="card card-body">
-                        <h4 class="title py-3">One Request, Multiple Quotes</h4>
+                        <h4 class="title py-3">Một yêu cầu, nhiều trích dẫn</h4>
                         <form>
                             <div class="form-group">
-                                <input class="form-control" name="" placeholder="What are you looking for?" type="text">
+                                <input class="form-control" name="" placeholder="Bạn đang tìm kiếm gì?" type="text">
                             </div>
                             <div class="form-group">
                                 <div class="input-group">
-                                    <input class="form-control" placeholder="Quantity" name="" type="text">
+                                    <input class="form-control" placeholder="Số lượng" name="" type="text">
 
                                     <select class="custom-select form-control">
-                                        <option>Pieces</option>
-                                        <option>Litres</option>
-                                        <option>Tons</option>
-                                        <option>Gramms</option>
+                                        <option>Các mảnh</option>
+                                        <option>Cái</option>
+                                        <option>Hàng nhập</option>
+                                        <option>Giá trị</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="form-group text-muted">
-                                <p>Select template type:</p>
+                                <p>Chọn loại mẫu:</p>
                                 <label class="form-check form-check-inline">
                                     <input class="form-check-input" type="checkbox" value="option1">
-                                    <div class="form-check-label">Request price</div>
+                                    <div class="form-check-label">Yêu cầu giá</div>
                                 </label>
                                 <label class="form-check form-check-inline">
                                     <input class="form-check-input" type="checkbox" value="option2">
-                                    <div class="form-check-label">Request a sample</div>
+                                    <div class="form-check-label">Yêu cầu mẫu</div>
                                 </label>
                             </div>
                             <div class="form-group">
-                                <button class="btn btn-warning">Request for quote</button>
+                                <button class="btn btn-warning">Yêu cầu báo giá</button>
                             </div>
                         </form>
                     </div>
@@ -299,12 +334,12 @@
                                         if (item.Sale_price == null)
                                         {
                                             <a> @item.Price VND</a>
-                                           
+
                                         }
                                         else
                                         {
                                             <a> @item.Sale_price VND</a>
-                                            
+
                                         }
                                     }
 
@@ -341,50 +376,75 @@
             </div> <!-- row.// -->
 
         </section>
-        <!-- =============== SECTION SERVICES .//END =============== -->
-        <!-- =============== SECTION REGION =============== -->
         <section class="padding-bottom">
-
             <header class="section-heading heading-line">
-                <h4 class="title-section text-uppercase">Chọn Quốc gia</h4>
+                <h4 class="title-section text-uppercase">Bài viết nổi bật</h4>
             </header>
+            <div class="row">
+                @foreach (var item in Model.ListPosts.Where(c => c.Status == 1).OrderByDescending(c => c.Id).Take(4))
+                {
+                    <div class="col-md-3 col-sm-6">
+                        <article class="card card-post">
+                          
+                            <img src="~/Content/images/posts/@item.Image" alt="Blog image">
+                            <div class="blog-item-content">
+                                <span class="date">@item.Slug</span>
+                                <a href="@Url.Action("Index","PostUi")">
+                                    <h4>@item.Title</h4>
+                                </a>
+                                
 
-            <ul class="row mt-4">
-                <li class="col-md col-6"><a href="#" class="icontext"> <img class="icon-flag-sm" src="~/Content/images/icons/flags/CN.png"> <span>China</span> </a></li>
-                <li class="col-md col-6"><a href="#" class="icontext"> <img class="icon-flag-sm" src="~/Content/images/icons/flags/DE.png"> <span>Germany</span> </a></li>
-                <li class="col-md col-6"><a href="#" class="icontext"> <img class="icon-flag-sm" src="~/Content/images/icons/flags/AU.png"> <span>Australia</span> </a></li>
-                <li class="col-md col-6"><a href="#" class="icontext"> <img class="icon-flag-sm" src="~/Content/images/icons/flags/RU.png"> <span>Russia</span> </a></li>
-                <li class="col-md col-6"><a href="#" class="icontext"> <img class="icon-flag-sm" src="~/Content/images/icons/flags/IN.png"> <span>India</span> </a></li>
-                <li class="col-md col-6"><a href="#" class="icontext"> <img class="icon-flag-sm" src="~/Content/images/icons/flags/GB.png"> <span>England</span> </a></li>
-                <li class="col-md col-6"><a href="#" class="icontext"> <img class="icon-flag-sm" src="~/Content/images/icons/flags/TR.png"> <span>Turkey</span> </a></li>
-                <li class="col-md col-6"><a href="#" class="icontext"> <img class="icon-flag-sm" src="~/Content/images/icons/flags/UZ.png"> <span>Uzbekistan</span> </a></li>
-                <li class="col-md col-6"><a href="#" class="icontext"> <i class="mr-3 fa fa-ellipsis-h"></i> <span>Quốc gia khác</span> </a></li>
-            </ul>
+                            </div>
+                        </article>
+                    </div>
+                }
+                </div>
+                
         </section>
-        <!-- =============== SECTION REGION .//END =============== -->
+            <!-- =============== SECTION SERVICES .//END =============== -->
+            <!-- =============== SECTION REGION =============== -->
+            <section class="padding-bottom">
 
-        <article class="my-4">
-            <img src="~/Content/images/banners/ad-sm.png" class="w-100">
-        </article>
+                <header class="section-heading heading-line">
+                    <h4 class="title-section text-uppercase">Chọn Quốc gia</h4>
+                </header>
+
+                <ul class="row mt-4">
+                    <li class="col-md col-6"><a href="#" class="icontext"> <img class="icon-flag-sm" src="~/Content/images/icons/flags/CN.png"> <span>China</span> </a></li>
+                    <li class="col-md col-6"><a href="#" class="icontext"> <img class="icon-flag-sm" src="~/Content/images/icons/flags/DE.png"> <span>Germany</span> </a></li>
+                    <li class="col-md col-6"><a href="#" class="icontext"> <img class="icon-flag-sm" src="~/Content/images/icons/flags/AU.png"> <span>Australia</span> </a></li>
+                    <li class="col-md col-6"><a href="#" class="icontext"> <img class="icon-flag-sm" src="~/Content/images/icons/flags/RU.png"> <span>Russia</span> </a></li>
+                    <li class="col-md col-6"><a href="#" class="icontext"> <img class="icon-flag-sm" src="~/Content/images/icons/flags/IN.png"> <span>India</span> </a></li>
+                    <li class="col-md col-6"><a href="#" class="icontext"> <img class="icon-flag-sm" src="~/Content/images/icons/flags/GB.png"> <span>England</span> </a></li>
+                    <li class="col-md col-6"><a href="#" class="icontext"> <img class="icon-flag-sm" src="~/Content/images/icons/flags/TR.png"> <span>Turkey</span> </a></li>
+                    <li class="col-md col-6"><a href="#" class="icontext"> <img class="icon-flag-sm" src="~/Content/images/icons/flags/UZ.png"> <span>Uzbekistan</span> </a></li>
+                    <li class="col-md col-6"><a href="#" class="icontext"> <i class="mr-3 fa fa-ellipsis-h"></i> <span>Quốc gia khác</span> </a></li>
+                </ul>
+            </section>
+            <!-- =============== SECTION REGION .//END =============== -->
+
+            <article class="my-4">
+                <img src="~/Content/images/banners/ad-sm.png" class="w-100">
+            </article>
     </div>
     <!-- container end.// -->
     <!-- ========================= SECTION SUBSCRIBE  ========================= -->
     <section class="section-subscribe padding-y-lg">
         <div class="container">
 
-            <p class="pb-2 text-center text-white">Delivering the latest product trends and industry news straight to your inbox</p>
+            <p class="pb-2 text-center text-white"> Để lại Email để nhận thông báo các sản phẩm mới nhất tại VanHaiStudio</p>
 
             <div class="row justify-content-md-center">
                 <div class="col-lg-5 col-md-6">
                     <form class="form-row">
                         <div class="col-md-8 col-7">
-                            <input class="form-control border-0" placeholder="Your Email" type="email">
+                            <input class="form-control border-0" placeholder=" Email của bạn" type="email">
                         </div> <!-- col.// -->
                         <div class="col-md-4 col-5">
-                            <button type="submit" class="btn btn-block btn-warning"> <i class="fa fa-envelope"></i> Subscribe </button>
+                            <button type="submit" class="btn btn-block btn-warning"> <i class="fa fa-envelope"></i> Hoàn thành </button>
                         </div> <!-- col.// -->
                     </form>
-                    <small class="form-text text-white-50">We’ll never share your email address with a third-party. </small>
+                    <small class="form-text text-white-50"> Cam kết bảo mật Email của khách hàng khỏi bên thứ 3. </small>
                 </div> <!-- col-md-6.// -->
             </div>
 

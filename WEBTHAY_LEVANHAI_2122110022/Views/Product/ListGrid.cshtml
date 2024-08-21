@@ -15,44 +15,44 @@
     <section class="section-content padding-y">
         <div class="container">
             <!-- ============================ FORM SEARCH ================================= -->
-            
+
             <hr />
 
             <!-- ============================ FILTER TOP ================================= -->
             <div class="card mb-3">
                 <div class="card-body">
                     <div class="row">
-                        <div class="col-md-2"> You are here: </div> <!-- col.// -->
+                        <div class="col-md-2"> Bạn đang ở: </div> <!-- col.// -->
                         <nav class="col-md-8">
                             <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="@Url.Action("Index","Home")">Home</a></li>
-                                <li class="breadcrumb-item"><a href="#">Category name</a></li>
-                                <li class="breadcrumb-item"><a href="#">Sub category</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">Items</li>
+                                <li class="breadcrumb-item"><a href="@Url.Action("Index","Home")">Trang chủ</a></li>
+                                <li class="breadcrumb-item"><a href="#">Danh mục</a></li>
+                                <li class="breadcrumb-item"><a href="#">Danh mục phụ</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Sản phẩm</li>
                             </ol>
                         </nav> <!-- col.// -->
                     </div> <!-- row.// -->
                     <hr>
                     <div class="row">
-                        <div class="col-md-2">Filter by</div> <!-- col.// -->
+                        <div class="col-md-2">Lọc</div> <!-- col.// -->
                         <div class="col-md-10">
                             <ul class="list-inline">
                                 <li class="list-inline-item mr-3 dropdown">
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"> Supplier type </a>
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"> Kiểu sản phẩm </a>
                                     <div class="dropdown-menu p-3" style="max-width:400px;">
                                         <label class="form-check">
-                                            <input type="radio" name="myfilter" class="form-check-input"> Good supplier
+                                            <input type="radio" name="myfilter" class="form-check-input"> Tốt nhất
                                         </label>
                                         <label class="form-check">
-                                            <input type="radio" name="myfilter" class="form-check-input"> Best supplier
+                                            <input type="radio" name="myfilter" class="form-check-input"> Phổ biến
                                         </label>
                                         <label class="form-check">
-                                            <input type="radio" name="myfilter" class="form-check-input"> New supplier
+                                            <input type="radio" name="myfilter" class="form-check-input"> Mới nhất
                                         </label>
                                     </div> <!-- dropdown-menu.// -->
                                 </li>
                                 <li class="list-inline-item mr-3 dropdown">
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"> Country </a>
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"> Thành phố </a>
                                     <div class="dropdown-menu p-3">
                                         <label class="form-check"> <input type="checkbox" class="form-check-input"> China </label>
                                         <label class="form-check"> <input type="checkbox" class="form-check-input"> Japan </label>
@@ -61,29 +61,29 @@
                                     </div> <!-- dropdown-menu.// -->
                                 </li>
                                 <li class="list-inline-item mr-3 dropdown">
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Feature</a>
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Chất liệu</a>
                                     <div class="dropdown-menu">
-                                        <a href="" class="dropdown-item">Anti bacterial</a>
-                                        <a href="" class="dropdown-item">With buttons</a>
-                                        <a href="" class="dropdown-item">Extra safety</a>
+                                        <a href="" class="dropdown-item">Cotton</a>
+                                        <a href="" class="dropdown-item">Nỉ</a>
+                                        <a href="" class="dropdown-item">Suông</a>
                                     </div>
                                 </li>
-                                <li class="list-inline-item mr-3"><a href="#">Color</a></li>
-                                <li class="list-inline-item mr-3"><a href="#">Size</a></li>
+                                <li class="list-inline-item mr-3"><a href="#">Màu</a></li>
+                                <li class="list-inline-item mr-3"><a href="#">Kích cỡ</a></li>
                                 <li class="list-inline-item mr-3">
                                     <div class="form-inline">
-                                        <label class="mr-2">Price</label>
-                                        <input class="form-control form-control-sm" placeholder="Min" type="number">
+                                        <label class="mr-2">Giá</label>
+                                        <input class="form-control form-control-sm" placeholder="Thấp nhất" type="number">
                                         <span class="px-2"> - </span>
-                                        <input class="form-control form-control-sm" placeholder="Max" type="number">
-                                        <button type="submit" class="btn btn-sm btn-light ml-2">Ok</button>
+                                        <input class="form-control form-control-sm" placeholder="Cao nhất" type="number">
+                                        <button type="submit" class="btn btn-sm btn-light ml-2">Lưu</button>
                                     </div>
                                 </li>
                                 <li class="list-inline-item mr-3">
                                     <label class="custom-control mt-1 custom-checkbox">
                                         <input type="checkbox" class="custom-control-input">
                                         <div class="custom-control-label">
-                                            Ready to ship
+                                            Sẵn sàng để ship
                                         </div>
                                     </label>
                                 </li>
@@ -96,12 +96,12 @@
 
             <header class="mb-3">
                 <div class="form-inline">
-                    <strong class="mr-md-auto">32 Items found </strong>
+                    <strong class="mr-md-auto">Sản phẩm </strong>
                     <select class="mr-2 form-control">
-                        <option>Latest items</option>
-                        <option>Trending</option>
-                        <option>Most Popular</option>
-                        <option>Cheapest</option>
+                        <option>Sản phẩm hot</option>
+                        <option>Sản phẩm mới</option>
+                        <option>Sản phẩm phổ biến</option>
+                        <option>Sản phẩm tồn </option>
                     </select>
                     <div class="btn-group">
                         <a href="" class="btn btn-light active" data-toggle="tooltip" title="List view">
@@ -120,7 +120,7 @@
                     <div class="col-md-3">
                         <figure class="card card-product-grid">
                             <div class="img-wrap">
-                                <span class="badge badge-danger"> NEW </span>
+                                <span class="badge badge-danger"> Mới </span>
                                 <img src="~/Content/images/items/@item.Image">
                             </div> <!-- img-wrap.// -->
                             <figcaption class="info-wrap">
@@ -145,20 +145,20 @@
                                 <hr>
 
                                 <p class="mb-3">
-                                    <span class="tag"> <i class="fa fa-check"></i> Verified</span>
-                                    <span class="tag"> 2 Years </span>
-                                    <span class="tag"> 23 reviews </span>
-                                    <span class="tag"> Japan </span>
+                                    <span class="tag"> <i class="fa fa-check"></i> Đã được kiểm định</span>
+                                    <span class="tag"> 2 năm </span>
+                                    <span class="tag"> 23 đánh giá </span>
+                                    <span class="tag"> @item.Category.name </span>
                                 </p>
 
                                 <label class="custom-control mb-3 custom-checkbox">
                                     <input type="checkbox" class="custom-control-input">
                                     <div class="custom-control-label">
-                                        Add to compare
+                                        Thêm để so sánh
                                     </div>
                                 </label>
 
-                                <a href="#" class="btn btn-outline-primary"> <i class="fa fa-envelope"></i> Contact supplier </a>
+                                <a href="#" class="btn btn-outline-primary"> <i class="fa fa-envelope"></i> Liên hệ nhà cung cấp </a>
 
                             </figcaption>
                         </figure>
@@ -194,31 +194,31 @@
 
 
             <div class="box text-center">
-                <p>Did you find what you were looking for？</p>
-                <a href="" class="btn btn-light">Yes</a>
-                <a href="" class="btn btn-light">No</a>
+                <p>Bạn đã tìm thấy những gì bạn đang tìm kiếm chưa?？</p>
+                <a href="" class="btn btn-light">Rồi</a>
+                <a href="" class="btn btn-light">Chưa</a>
             </div>
 
         </div> <!-- container .//  -->
     </section>
     <!-- ========================= SECTION CONTENT END// ========================= -->
     <!-- ========================= SECTION SUBSCRIBE  ========================= -->
-    <section class="padding-y-lg bg-light border-top">
+    <section class="section-subscribe padding-y-lg">
         <div class="container">
 
-            <p class="pb-2 text-center">Delivering the latest product trends and industry news straight to your inbox</p>
+            <p class="pb-2 text-center text-white"> Để lại Email để nhận thông báo các sản phẩm mới nhất tại VanHaiStudio</p>
 
             <div class="row justify-content-md-center">
-                <div class="col-lg-4 col-sm-6">
+                <div class="col-lg-5 col-md-6">
                     <form class="form-row">
-                        <div class="col-8">
-                            <input class="form-control" placeholder="Your Email" type="email">
+                        <div class="col-md-8 col-7">
+                            <input class="form-control border-0" placeholder=" Email của bạn" type="email">
                         </div> <!-- col.// -->
-                        <div class="col-4">
-                            <button type="submit" class="btn btn-block btn-warning"> <i class="fa fa-envelope"></i> Subscribe </button>
+                        <div class="col-md-4 col-5">
+                            <button type="submit" class="btn btn-block btn-warning"> <i class="fa fa-envelope"></i> Hoàn thành </button>
                         </div> <!-- col.// -->
                     </form>
-                    <small class="form-text">We’ll never share your email address with a third-party. </small>
+                    <small class="form-text text-white-50"> Cam kết bảo mật Email của khách hàng khỏi bên thứ 3. </small>
                 </div> <!-- col-md-6.// -->
             </div>
 

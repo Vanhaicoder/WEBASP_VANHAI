@@ -1,0 +1,98 @@
+﻿@model WEBTHAY_LEVANHAI_2122110022.Models.Order
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+
+<div class="content-wrapper">
+    <h3>Bạn có chắc chắn muốn xóa ?</h3>
+    <div>
+        <h4>Đơn hàng</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Delivery_name)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Delivery_name)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Delivery_gender)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Delivery_gender)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Delivery_email)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Delivery_email)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Delivery_phone)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Delivery_phone)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Delivery_address)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Delivery_address)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Note)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Note)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Type)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Type)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Status)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Status)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.User.FirstName)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.User.FirstName)
+            </dd>
+
+        </dl>
+
+        @using (Html.BeginForm("Delete", "Order", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-actions no-color">
+                <input type="submit" value="Xóa" class="btn btn-default" /> |
+                @Html.ActionLink("Quay lại", "Index")
+            </div>
+        }
+    </div>
+    </div>

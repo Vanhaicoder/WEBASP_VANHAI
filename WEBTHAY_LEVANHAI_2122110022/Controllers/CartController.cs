@@ -4,6 +4,7 @@ using System;
 using System.Linq;
 
 using WEBTHAY_LEVANHAI_2122110022.Models;
+using System.Data.Entity.Validation;
 
 public class CartController : Controller
 {
@@ -20,7 +21,14 @@ public class CartController : Controller
         if (Session["cart"] == null)
         {
             List<CartModel> cart = new List<CartModel>();
-            cart.Add(new CartModel { Product = objAspNetWebEntities.Products.Find(id), Quantity = quantity });
+            var product = objAspNetWebEntities.Products.Find(id);
+            cart.Add(new CartModel
+            {
+                Product = product,
+                Quantity = quantity,
+                Price = (float)product.Price,
+                Sale_price = product.Sale_price.HasValue ? (float)product.Sale_price : 0
+            });
             Session["cart"] = cart;
             Session["count"] = 1;
         }
@@ -34,13 +42,21 @@ public class CartController : Controller
             }
             else
             {
-                cart.Add(new CartModel { Product = objAspNetWebEntities.Products.Find(id), Quantity = quantity });
+                var product = objAspNetWebEntities.Products.Find(id);
+                cart.Add(new CartModel
+                {
+                    Product = product,
+                    Quantity = quantity,
+                    Price = (float)product.Price,
+                    Sale_price = product.Sale_price.HasValue ? (float)product.Sale_price : 0
+                });
                 Session["count"] = Convert.ToInt32(Session["count"]) + 1;
             }
             Session["cart"] = cart;
         }
         return Json(new { Message = "Thành công", JsonRequestBehavior.AllowGet });
     }
+
 
     private int isExist(int id)
     {
@@ -74,21 +90,8 @@ public class CartController : Controller
     }
 
     // Trang thanh toán
-    public ActionResult Payment()
-    {
-        var cart = GetCartItems();
-        var model = new PaymentModel
-        {
-            CartItems = cart,
-            TotalPrice = cart.Sum(item => (decimal)((item.Product.Sale_price ?? item.Product.Price) * item.Quantity))
-        };
-
-        // Sau khi thanh toán thành công, xóa sản phẩm khỏi giỏ hàng
-        Session["cart"] = null;
-        Session["count"] = 0;
-
-        return View(model);
+    
     }
 
 
-}
+

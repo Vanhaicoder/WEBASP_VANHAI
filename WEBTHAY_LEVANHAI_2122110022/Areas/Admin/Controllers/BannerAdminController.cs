@@ -12,12 +12,12 @@ namespace WEBTHAY_LEVANHAI_2122110022.Areas.Admin.Controllers
 {
     public class BannerController : Controller
     {
-        WebBanHangEntities db = new WebBanHangEntities();
+        private WebBanHangEntities db = new WebBanHangEntities();
 
         // GET: Admin/Banner
         public ActionResult Index(string SearchString, string currentFilter, int? page)
         {
-            var listBanner = new List<Banner>();
+            // Handle the search query
             if (SearchString != null)
             {
                 page = 1;
@@ -26,22 +26,23 @@ namespace WEBTHAY_LEVANHAI_2122110022.Areas.Admin.Controllers
             {
                 SearchString = currentFilter;
             }
+
+            ViewBag.CurrentFilter = SearchString;
+
+            // Query banners based on the search filter
+            var listBanner = db.Banners.AsQueryable();
             if (!string.IsNullOrEmpty(SearchString))
             {
-                // Lấy danh sách banner theo từ khóa tìm kiếm
-                listBanner = db.Banners.Where(n => n.Name.Contains(SearchString)).ToList();
+                listBanner = listBanner.Where(n => n.Name.Contains(SearchString));
             }
-            else
-            {
-                // Lấy tất cả banner trong bảng Banner
-                listBanner = db.Banners.ToList();
-            }
-            ViewBag.CurrentFilter = SearchString;
-            // Số lượng item của 1 trang = 4
+
+            // Order by descending Id
+            listBanner = listBanner.OrderByDescending(n => n.Id);
+
+            // Pagination settings
             int pageSize = 4;
             int pageNumber = (page ?? 1);
-            // Sắp xếp theo id banner, banner mới đưa lên đầu
-            listBanner = listBanner.OrderByDescending(n => n.Id).ToList();
+
             return View(listBanner.ToPagedList(pageNumber, pageSize));
         }
 
@@ -55,9 +56,8 @@ namespace WEBTHAY_LEVANHAI_2122110022.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(Banner objBanner)
         {
-            try
+            if (ModelState.IsValid)
             {
-                // Kiểm tra nếu có hình ảnh được tải lên
                 if (objBanner.ImageUpload != null && objBanner.ImageUpload.ContentLength > 0)
                 {
                     string fileName = Path.GetFileNameWithoutExtension(objBanner.ImageUpload.FileName);
@@ -68,39 +68,49 @@ namespace WEBTHAY_LEVANHAI_2122110022.Areas.Admin.Controllers
                     objBanner.ImageUpload.SaveAs(path);
                 }
 
-                // Thêm banner vào cơ sở dữ liệu
                 db.Banners.Add(objBanner);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            catch (Exception ex)
-            {
-                // Xử lý lỗi (có thể thêm ghi log hoặc thông báo lỗi cho người dùng)
-                ModelState.AddModelError("", "Có lỗi xảy ra: " + ex.Message);
-                return View(objBanner);
-            }
+
+            return View(objBanner);
         }
 
         [HttpGet]
         public ActionResult Details(int id)
         {
-            var objBanner = db.Banners.Where(n => n.Id == id).FirstOrDefault();
+            var objBanner = db.Banners.Find(id);
+            if (objBanner == null)
+            {
+                return HttpNotFound();
+            }
+
             return View(objBanner);
         }
 
         [HttpGet]
         public ActionResult Delete(int id)
         {
-            var objBanner = db.Banners.Where(n => n.Id == id).FirstOrDefault();
+            var objBanner = db.Banners.Find(id);
+            if (objBanner == null)
+            {
+                return HttpNotFound();
+            }
+
             return View(objBanner);
         }
 
-        [HttpPost]
-        public ActionResult Delete(Banner objBanner)
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirmed(int id)
         {
-            var bannerToDelete = db.Banners.Where(n => n.Id == objBanner.Id).FirstOrDefault();
-            db.Banners.Remove(bannerToDelete);
-            db.SaveChanges();
+            var bannerToDelete = db.Banners.Find(id);
+            if (bannerToDelete != null)
+            {
+                db.Banners.Remove(bannerToDelete);
+                db.SaveChanges();
+            }
+
             return RedirectToAction("Index");
         }
 
@@ -108,7 +118,6 @@ namespace WEBTHAY_LEVANHAI_2122110022.Areas.Admin.Controllers
         public ActionResult Edit(int id)
         {
             var objBanner = db.Banners.Find(id);
-
             if (objBanner == null)
             {
                 return HttpNotFound();
@@ -118,20 +127,27 @@ namespace WEBTHAY_LEVANHAI_2122110022.Areas.Admin.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Edit(Banner objBanner)
         {
-            if (objBanner.ImageUpload != null && objBanner.ImageUpload.ContentLength > 0)
+            if (ModelState.IsValid)
             {
-                string fileName = Path.GetFileNameWithoutExtension(objBanner.ImageUpload.FileName);
-                string extension = Path.GetExtension(objBanner.ImageUpload.FileName);
-                fileName = fileName + "_" + DateTime.Now.ToString("yyyyMMddhhmmss") + extension;
-                objBanner.Image = fileName;
-                string path = Path.Combine(Server.MapPath("~/Content/images/banners/"), fileName);
-                objBanner.ImageUpload.SaveAs(path);
+                if (objBanner.ImageUpload != null && objBanner.ImageUpload.ContentLength > 0)
+                {
+                    string fileName = Path.GetFileNameWithoutExtension(objBanner.ImageUpload.FileName);
+                    string extension = Path.GetExtension(objBanner.ImageUpload.FileName);
+                    fileName = fileName + "_" + DateTime.Now.ToString("yyyyMMddhhmmss") + extension;
+                    objBanner.Image = fileName;
+                    string path = Path.Combine(Server.MapPath("~/Content/images/banners/"), fileName);
+                    objBanner.ImageUpload.SaveAs(path);
+                }
+
+                db.Entry(objBanner).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index");
             }
-            db.Entry(objBanner).State = EntityState.Modified;
-            db.SaveChanges();
-            return RedirectToAction("Index");
+
+            return View(objBanner);
         }
     }
 }

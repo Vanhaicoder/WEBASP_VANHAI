@@ -15,6 +15,7 @@ namespace WEBTHAY_LEVANHAI_2122110022.Controllers
         WebBanHangEntities objAspNetWeb = new WebBanHangEntities();
         // GET: User
 
+
         public ActionResult Register()
         {
             return View();
@@ -78,11 +79,6 @@ namespace WEBTHAY_LEVANHAI_2122110022.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Login(string email, string password)
         {
-            if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(password))
-            {
-                ViewBag.error = "Email and Password không hợp lệ";
-                return View();
-            }
             if (ModelState.IsValid)
             {
 
@@ -94,7 +90,10 @@ namespace WEBTHAY_LEVANHAI_2122110022.Controllers
                     //add session
                     Session["FullName"] = data.FirstOrDefault().FirstName + " " + data.FirstOrDefault().LastName;
                     Session["Email"] = data.FirstOrDefault().Email;
-                    Session["idUser"] = data.FirstOrDefault().Id; return RedirectToAction("Index", "Home");
+                    Session["idUser"] = data.FirstOrDefault().Id;
+                    Session["Phone"] = data.FirstOrDefault().Phone;
+                    Session["Address"] = data.FirstOrDefault().Address;
+                    return RedirectToAction("Index", "Home");
                 }
                 else
                 {
@@ -113,10 +112,7 @@ namespace WEBTHAY_LEVANHAI_2122110022.Controllers
             return RedirectToAction("Login");
         }
 
-        //Profile
-        public ActionResult Profile()
-        {
-            return View();
-        }
+
+
     }
 }

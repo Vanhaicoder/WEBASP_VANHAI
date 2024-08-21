@@ -1,0 +1,74 @@
+﻿@model IEnumerable<WEBTHAY_LEVANHAI_2122110022.Models.Topic>
+@{
+    ViewBag.Title = "Index";
+}
+<style>
+    .highlighted-section {
+        text-align: center;
+        padding: 20px;
+        background-color: #f9f9f9;
+        border: 1px solid #ddd;
+        margin: 20px 0;
+        border-radius: 10px;
+    }
+
+        .highlighted-section h2 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+    .category-buttons {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-bottom: 20px;
+    }
+
+        .category-buttons a {
+            display: inline-block;
+            padding: 10px 15px;
+            border: 2px solid red;
+            border-radius: 5px;
+            color: red;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: bold;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+            .category-buttons a:hover {
+                background-color: red;
+                color: #fff;
+            }
+
+    .section-description {
+        font-size: 16px;
+        color: #666;
+        max-width: 600px;
+        margin: 0 auto;
+        line-height: 1.6;
+    }
+</style>
+<body>
+
+    <div class="highlighted-section">
+        <h2>Chuyên mục nổi bật</h2>
+        <div class="category-buttons">
+            @foreach (var topic in Model)
+            {
+                <a href="@Url.Action("PostsByTopicId", "Topic", new { id = topic.Topic_id })">
+                    @topic.Name
+                </a>
+            }
+        </div>
+        <p class="section-description">
+            VanHaiStudio Blog cung cấp những nội dung liên quan đến thế giới thời trang, làm đẹp. Ngoài ra, trang blog luôn cập nhật những chia sẻ ngắn, bí quyết về thời trang, làm đẹp cùng những trang phục đẹp hàng ngày.
+        </p>
+    </div>
+
+</body>
+</html>
+
+

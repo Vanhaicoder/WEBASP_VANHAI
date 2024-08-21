@@ -15,6 +15,7 @@ namespace WEBTHAY_LEVANHAI_2122110022.Areas.Admin.Controllers
         WebBanHangEntities db = new WebBanHangEntities();
 
         // GET: Admin/ProductAdmin
+
         public ActionResult Index(string SearchString,string currentFilter, int? page)
         {
            var listProduct = new List<Product>();

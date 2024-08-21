@@ -4,7 +4,8 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Trang quản trị</title>
+    <title> Trang quản trị</title>
+    <link href="~/Content/images/icons/logoo.jpg" rel="shortcut icon" type="image/x-icon">
     <link rel="stylesheet"
           href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <link rel="stylesheet" href="~/Content/plugins/fontawesome-free/css/all.min.css">
@@ -20,7 +21,7 @@
                     <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
                 </li>
                 <li class="nav-item d-none d-sm-inline-block">
-                    <a href="@Url.Action("Index","HomeAdmin")" class="nav-link">Home</a>
+                    <a href="@Url.Action("Index","HomeAdmin")" class="nav-link">Trang chủ</a>
                 </li>
                 <li class="nav-item d-none d-sm-inline-block">
                     <a href="#" class="nav-link">Contact</a>
@@ -42,9 +43,10 @@
 
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <a href="@Url.Action("Index","HomeAdmin")" class="brand-link">
-                <img src="~/Content/dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
+                <img src="~/Content/images/icons/logoo.jpg" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
+             
                      style="opacity: .8">
-                <span class="brand-text font-weight-light">Admin</span>
+                <span class="brand-text font-weight-light">VANHAI STUDIO</span>
             </a>
             <div class="sidebar">
                 <div class="user-panel mt-3 pb-3 mb-3 d-flex">
@@ -75,13 +77,13 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="category_index.html" class="nav-link">
+                                    <a href="@Url.Action("Index","CategoryAdmin")" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Danh mục</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="brand_index.html" class="nav-link">
+                                    <a href="@Url.Action("Index","Brand")" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Thương hiệu</p>
                                     </a>
@@ -98,13 +100,13 @@
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="post_index.html" class="nav-link">
+                                    <a href="@Url.Action("Index","Post")" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Tất cả bài viết</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="topic_index.html" class="nav-link">
+                                    <a href="@Url.Action("Index","Topic")" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Chủ đề</p>
                                     </a>
@@ -112,13 +114,13 @@
                             </ul>
                         </li>
                         <li class="nav-item">
-                            <a href="order_index.html" class="nav-link">
+                            <a href="@Url.Action("Index","Order")" class="nav-link">
                                 <i class="fas fa-shopping-bag"></i>
                                 <p>Đơn hàng</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="contact_index.html" class="nav-link">
+                            <a href="@Url.Action("Index","Contact")" class="nav-link">
                                 <i class="fas fa-id-card"></i>
                                 <p>Liên hệ</p>
                             </a>
@@ -132,12 +134,12 @@
                                 </p>
                             </a>
                             <ul class="nav nav-treeview">
-                                <li class="nav-item">
+                                @*<li class="nav-item">
                                     <a href="menu_index.html" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Menu</p>
                                     </a>
-                                </li>
+                                </li>*@
                                 <li class="nav-item">
                                     <a href="@Url.Action("Index","Banner")" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
@@ -147,7 +149,7 @@
                             </ul>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
+                            <a href="" class="nav-link">
                                 <i class="nav-icon fas fa-table"></i>
                                 <p>
                                     Thành viên
@@ -156,13 +158,13 @@
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="user_index.html" class="nav-link">
+                                    <a href="@Url.Action("Index","User")" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Tất cả thành viên</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="user_create.html" class="nav-link">
+                                    <a href="@Url.Action("Create","User")" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Thêm thành viên</p>
                                     </a>

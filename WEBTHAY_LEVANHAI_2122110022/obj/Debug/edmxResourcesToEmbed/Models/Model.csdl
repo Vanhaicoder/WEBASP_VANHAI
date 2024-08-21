@@ -60,12 +60,12 @@
     <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="User_id" Type="Int64" Nullable="false" />
     <Property Name="Delivery_name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="Delivery_gender" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Delivery_gender" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
     <Property Name="Delivery_email" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="Delivery_phone" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="Delivery_address" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="Note" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-    <Property Name="Type" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="Delivery_phone" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="Delivery_address" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="Note" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+    <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="Status" Type="Byte" Nullable="false" />
     <NavigationProperty Name="User" Relationship="Self.FK_Order_User" FromRole="Order" ToRole="User" />
     <NavigationProperty Name="Orderdetails" Relationship="Self.FK_Orderdetail_Order" FromRole="Order" ToRole="Orderdetail" />
@@ -77,12 +77,26 @@
     <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Order_id" Type="Int64" Nullable="false" />
     <Property Name="Product_id" Type="Int64" Nullable="false" />
-    <Property Name="Price" Type="Double" Nullable="false" />
+    <Property Name="Price" Type="Double" />
     <Property Name="Qty" Type="Int32" Nullable="false" />
-    <Property Name="Discount" Type="Double" Nullable="false" />
-    <Property Name="Amount" Type="Double" Nullable="false" />
+    <Property Name="Discount" Type="Double" />
+    <Property Name="Amount" Type="Double" />
     <NavigationProperty Name="Order" Relationship="Self.FK_Orderdetail_Order" FromRole="Orderdetail" ToRole="Order" />
     <NavigationProperty Name="Product" Relationship="Self.FK_Orderdetail_Product" FromRole="Orderdetail" ToRole="Product" />
+  </EntityType>
+  <EntityType Name="Post">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Title" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Slug" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Detail" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Image" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Status" Type="Byte" Nullable="false" />
+    <Property Name="Topic_id" Type="Int64" />
+    <Property Name="Description" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Topic" Relationship="Self.FK_Post_Topic" FromRole="Post" ToRole="Topic" />
   </EntityType>
   <EntityType Name="Product">
     <Key>
@@ -113,6 +127,17 @@
     <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="version" Type="Int32" />
     <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="Topic">
+    <Key>
+      <PropertyRef Name="Topic_id" />
+    </Key>
+    <Property Name="Topic_id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Slug" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Status" Type="Byte" Nullable="false" />
+    <NavigationProperty Name="Posts" Relationship="Self.FK_Post_Topic" FromRole="Topic" ToRole="Post" />
   </EntityType>
   <EntityType Name="User">
     <Key>
@@ -216,6 +241,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_Post_Topic">
+    <End Role="Topic" Type="Self.Topic" Multiplicity="0..1" />
+    <End Role="Post" Type="Self.Post" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Topic">
+        <PropertyRef Name="Topic_id" />
+      </Principal>
+      <Dependent Role="Post">
+        <PropertyRef Name="Topic_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <EntityContainer Name="WebBanHangEntities" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="Banners" EntityType="Self.Banner" />
     <EntitySet Name="Brands" EntityType="Self.Brand" />
@@ -223,8 +260,10 @@
     <EntitySet Name="Contacts" EntityType="Self.Contact" />
     <EntitySet Name="Orders" EntityType="Self.Order" />
     <EntitySet Name="Orderdetails" EntityType="Self.Orderdetail" />
+    <EntitySet Name="Posts" EntityType="Self.Post" />
     <EntitySet Name="Products" EntityType="Self.Product" />
     <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+    <EntitySet Name="Topics" EntityType="Self.Topic" />
     <EntitySet Name="Users" EntityType="Self.User" />
     <AssociationSet Name="FK_Product_Brand" Association="Self.FK_Product_Brand">
       <End Role="Brand" EntitySet="Brands" />
@@ -253,6 +292,10 @@
     <AssociationSet Name="FK_Orderdetail_Product" Association="Self.FK_Orderdetail_Product">
       <End Role="Product" EntitySet="Products" />
       <End Role="Orderdetail" EntitySet="Orderdetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Post_Topic" Association="Self.FK_Post_Topic">
+      <End Role="Topic" EntitySet="Topics" />
+      <End Role="Post" EntitySet="Posts" />
     </AssociationSet>
   </EntityContainer>
 </Schema>

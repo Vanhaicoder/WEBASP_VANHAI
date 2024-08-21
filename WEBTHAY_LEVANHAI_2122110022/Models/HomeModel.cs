@@ -13,5 +13,6 @@ namespace WEBTHAY_LEVANHAI_2122110022.Models
         public List<Product> RelatedProducts { get; set; }
         public Product Product { get; internal set; }
         public List<Banner> ListBanner { get; set; }
+        public List<Post> ListPosts { get; set; }
     }
 }

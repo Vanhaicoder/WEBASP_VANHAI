@@ -17,10 +17,10 @@ namespace WEBTHAY_LEVANHAI_2122110022.Models
         public long Id { get; set; }
         public long Order_id { get; set; }
         public long Product_id { get; set; }
-        public double Price { get; set; }
+        public Nullable<double> Price { get; set; }
         public int Qty { get; set; }
-        public double Discount { get; set; }
-        public double Amount { get; set; }
+        public Nullable<double> Discount { get; set; }
+        public Nullable<double> Amount { get; set; }
     
         public virtual Order Order { get; set; }
         public virtual Product Product { get; set; }

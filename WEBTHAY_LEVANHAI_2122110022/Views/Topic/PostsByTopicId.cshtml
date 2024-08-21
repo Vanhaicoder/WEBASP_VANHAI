@@ -1,0 +1,87 @@
+﻿@model IEnumerable<WEBTHAY_LEVANHAI_2122110022.Models.Post>
+
+<!DOCTYPE HTML>
+<html lang="vi">
+<head>
+    <style>
+        .blog-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .blog-item {
+            width: calc(33.33% - 20px); /* Ba mục trên mỗi hàng */
+            background-color: #fff;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+            margin-bottom: 20px;
+        }
+
+            .blog-item img {
+                width: 100%;
+                height: auto;
+                object-fit: cover;
+            }
+
+        .blog-item-content {
+            padding: 15px;
+        }
+
+        .blog-item .date {
+            font-size: 12px;
+            color: #bbb;
+            margin-bottom: 10px;
+        }
+
+        .blog-item h4 {
+            font-size: 18px;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .blog-item p {
+            color: #777;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .blog-item:hover {
+            transform: translateY(-5px);
+        }
+    </style>
+</head>
+<body>
+    <section class="section-pagetop bg-light">
+        <div class="container">
+            <h2 class="title-page">Chủ đề: @ViewBag.TopicName</h2>
+        </div>
+    </section>
+
+    <section class="section-content bg-white padding-y">
+        <div class="container">
+            <h5 class="card-title">Bài viết theo chủ đề</h5>
+            
+            <div class="blog-container mt-5">
+                @foreach (var post in Model)
+                {
+                    <div class="blog-item">
+                        <img src="~/Content/images/posts/@post.Image" alt="Blog image">
+                        <div class="blog-item-content">
+                            <span class="date">@post.Slug</span>
+                            <h4>@post.Title</h4>
+                            <p>@post.Description</p>
+                            <p>@post.Detail</p>
+                        </div>
+                    </div>
+                }
+            </div> <!-- blog-container -->
+            <br><br>
+
+            <a href="@Url.Action("Index", "Topic")" class="btn btn-light"> &laquo Quay lại trang chủ</a>
+        </div>
+    </section>
+</body>
+</html>

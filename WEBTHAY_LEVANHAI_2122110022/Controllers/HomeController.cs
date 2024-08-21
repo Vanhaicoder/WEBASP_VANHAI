@@ -16,6 +16,7 @@ namespace WEBTHAY_LEVANHAI_2122110022.Controllers
             model.ListCategory = db.Categories.ToList();
             model.ListBrand= db.Brands.ToList();
             model.ListBanner =db.Banners.ToList();
+            model.ListPosts = db.Posts.ToList();
             return View(model);
         }
 
@@ -68,6 +69,35 @@ namespace WEBTHAY_LEVANHAI_2122110022.Controllers
             //lấy ra danh sách sản phẩm 
             List<Product> ketqua = db.Products.ToList();
             return View(ketqua);
+        }
+
+        public ActionResult GioiThieu()
+        {
+            return View();
+        }
+        public ActionResult ChinhSachDoiTra()
+        {
+            return View();
+        }
+        public ActionResult ChinhSachNhanChuyen()
+        {
+            return View();
+        }
+        public ActionResult DieuKhoanDichVu()
+        {
+            return View();
+        }
+        public ActionResult ChinhSachBaoMat()
+        {
+            return View();
+        }
+        public ActionResult HuongDanMuaHang()
+        {
+            return View();
+        }
+        public ActionResult ChinhSachSuDungWeb()
+        {
+            return View();
         }
     }
 }

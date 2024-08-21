@@ -12,7 +12,7 @@ namespace WEBTHAY_LEVANHAI_2122110022.Controllers
 
     {
         // GET: Product
-        public ActionResult ListGrid(string query = "", int page = 1, int pageSize = 6)
+        public ActionResult ListGrid(string query = "", int page = 1, int pageSize = 8)
         {
             WebBanHangEntities dbss = new WebBanHangEntities();
             HomeModel model = new HomeModel();
@@ -47,7 +47,7 @@ namespace WEBTHAY_LEVANHAI_2122110022.Controllers
 
             return View(model);
         }
-        public ActionResult ListLarge(int page = 1, int pageSize = 6) 
+        public ActionResult ListLarge(int page = 1, int pageSize = 8) 
         {
             WebBanHangEntities dbs = new WebBanHangEntities();
             HomeModel model = new HomeModel();

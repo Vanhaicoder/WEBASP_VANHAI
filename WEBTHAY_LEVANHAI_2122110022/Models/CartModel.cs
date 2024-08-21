@@ -9,5 +9,7 @@ namespace WEBTHAY_LEVANHAI_2122110022.Models
     {
         public Product Product { get; set; }
         public int Quantity { get; set; }
+        public float Price { get; set; }  
+        public float Sale_price { get; set; }  
     }
 }

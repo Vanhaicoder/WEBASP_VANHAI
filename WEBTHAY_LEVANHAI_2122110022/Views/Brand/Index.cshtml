@@ -1,0 +1,89 @@
+﻿@model IEnumerable<WEBTHAY_LEVANHAI_2122110022.Models.Brand>
+
+@{
+    ViewBag.Title = "Danh sách Thương hiệu";
+}
+<style>
+    /* Wrapper cho toàn bộ phần thương hiệu */
+    .padding-bottom {
+        padding-bottom: 40px;
+    }
+
+    /* Tiêu đề của phần thương hiệu */
+    .section-heading {
+        margin-bottom: 20px;
+    }
+
+    .title-section {
+        font-size: 24px;
+        color: #333;
+        text-align: center;
+        text-transform: uppercase;
+        border-bottom: 2px solid #007bff;
+        display: inline-block;
+        padding-bottom: 10px;
+    }
+
+    /* Các thẻ card */
+    .card {
+        margin-top :20px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        margin-bottom: 20px;
+        transition: box-shadow 0.3s ease;
+    }
+
+        .card:hover {
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+    .card-img-top {
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+        border-bottom: 1px solid #ddd;
+    }
+
+    .card-body {
+        padding: 15px;
+    }
+
+        .card-body .title {
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .card-body .small {
+            font-size: 14px;
+            color: #666;
+        }
+
+
+   
+</style>
+
+<section class="padding-bottom">
+   
+
+    <div class="row">
+        @foreach (var item in Model)
+        {
+            <div class="col-md-3 col-sm-6">
+                <article class="card card-post">
+                    <a href="@Url.Action("ProductByBrandId", "Brand", new { id = item.Id })">
+                        <img src="~/Content/images/brands/@item.Image" class="card-img-top" alt="@item.Name">                   
+                    <div class="card-body">
+                        <h6 class="title">@item.Name</h6>
+                        <p class="small text-uppercase text-muted">@item.Description</p>
+                    </div>
+                </article> <!-- card.// -->
+            </div> <!-- col.// -->
+        }
+    </div> <!-- row.// -->
+
+</section>
+<a href="@Url.Action("Index","Home")" class="btn btn-light"> &laquo Quay lại </a>

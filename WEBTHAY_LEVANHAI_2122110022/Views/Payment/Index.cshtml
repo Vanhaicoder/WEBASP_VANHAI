@@ -1,0 +1,48 @@
+﻿@{
+    ViewBag.Title = "Thanh toán thành công";
+    var purchasedProducts = ViewBag.PurchasedProducts as List<WEBTHAY_LEVANHAI_2122110022.Models.CartModel>;
+}
+
+<div class="container" style="margin-top: 50px;">
+    <h2 class="text-success">Thanh toán thành công</h2>
+    <p>Cảm ơn bạn đã đặt hàng! Đơn hàng của bạn đã được ghi nhận.</p>
+    <p>Thông tin đơn hàng của bạn như sau:</p>
+
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>Tên sản phẩm</th>
+                <th>Số lượng</th>
+                <th>Giá</th>
+                <th>Thành tiền</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (purchasedProducts != null && purchasedProducts.Count > 0)
+            {
+                foreach (var item in purchasedProducts)
+                {
+                    double price = item.Sale_price > 0 ? item.Sale_price : item.Price;
+                    double amount = price * item.Quantity;
+
+                    <tr>
+                        <td>@item.Product.Name</td>
+                        <td>@item.Quantity</td>
+                        <td>@price VND</td>
+                        <td>@amount VND</td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <td colspan="4" class="text-center">Không có sản phẩm nào trong đơn hàng.</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <p class="text-center">
+        <a href="@Url.Action("Index", "Home")" class="btn btn-primary">Tiếp tục mua hàng</a>
+    </p>
+</div>

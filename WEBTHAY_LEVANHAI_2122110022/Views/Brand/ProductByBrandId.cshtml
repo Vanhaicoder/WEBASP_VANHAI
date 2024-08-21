@@ -1,0 +1,101 @@
+﻿@model WEBTHAY_LEVANHAI_2122110022.Models.HomeModel
+
+@{
+    int totalPages = ViewBag.TotalPages;
+    int currentPage = ViewBag.CurrentPage;
+}
+
+<!-- ========================= SECTION CONTENT ========================= -->
+<section class="section-content padding-y">
+    <div class="container">
+        <!-- Filter and content sections here -->
+
+        <header class="mb-3">
+            <div class="form-inline">
+                <strong class="mr-md-auto">Sản phẩm </strong>
+                <select class="mr-2 form-control">
+                    <option>Sản phẩm hot</option>
+                    <option>Sản phẩm mới</option>
+                    <option>Sản phẩm phổ biến</option>
+                    <option>Sản phẩm tồn </option>
+                </select>
+                <div class="btn-group">
+                    <a href="" class="btn btn-light active" data-toggle="tooltip" title="List view">
+                        <i class="fa fa-bars"></i>
+                    </a>
+                    <a href="@Url.Action("ListLarge", "Product")" class="btn btn-light" data-toggle="tooltip" title="Grid view">
+                        <i class="fa fa-th"></i>
+                    </a>
+                </div>
+            </div>
+        </header><!-- sect-heading -->
+
+        <div class="row">
+            @foreach (var item in Model.ListProduct)
+            {
+                <div class="col-md-3">
+                    <a href="@Url.Action("Detail", "Home", new { id = item.Id })">
+                        <figure class="card card-product-grid">
+                            <div class="img-wrap">
+                                <span class="badge badge-danger"> NEW </span>
+                                <img src="~/Content/images/items/@item.Image">
+                            </div> <!-- img-wrap.// -->
+                            <figcaption class="info-wrap">
+                                <a href="#" class="title mb-2"> @item.Name</a>
+                                <div class="price-wrap">
+                                    <span class="price">@item.Price VND</span>
+                                    <small class="text-muted">/per item</small>
+                                </div> <!-- price-wrap.// -->
+                                <p class="text-muted">@item.Brand.Name</p>
+                                <hr>
+                                <p class="mb-3">
+                                    <span class="tag"> <i class="fa fa-check"></i> Đã được kiểm định</span>
+                                    <span class="tag"> 2 năm </span>
+                                    <span class="tag"> 23 đánh giá </span>
+                                    <span class="tag"> @item.Category.name </span>
+                                </p>
+                                <label class="custom-control mb-3 custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input">
+                                    <div class="custom-control-label">
+                                        Thêm để so sánh
+                                    </div>
+                                </label>
+                                <a href="#" class="btn btn-outline-primary"> <i class="fa fa-envelope"></i> Liên hệ nhà cung cấp </a>
+                            </figcaption>
+                        </figure>
+                    </a>
+                </div> <!-- col.// -->
+            }
+        </div> <!-- row end.// -->
+
+        <nav aria-label="Page navigation">
+            <ul class="pagination">
+                <!-- Liên kết "Trang trước" -->
+                <li class="page-item @(currentPage == 1 ? "disabled" : "")">
+                    <a class="page-link" href="@Url.Action("ProductByBrandId", new { id = Model.ListProduct.FirstOrDefault()?.Brand_id, page = currentPage - 1 })" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span> Trang trước
+                    </a>
+                </li>
+
+                <!-- Hiển thị các trang số -->
+                @for (int i = 1; i <= totalPages; i++)
+                {
+                    <li class="page-item @(i == currentPage ? "active" : "")">
+                        <a class="page-link" href="@Url.Action("ProductByBrandId", new { id = Model.ListProduct.FirstOrDefault()?.Brand_id, page = i })">@i</a>
+                    </li>
+                }
+
+                <!-- Liên kết "Trang tiếp" -->
+                <li class="page-item @(currentPage == totalPages ? "disabled" : "")">
+                    <a class="page-link" href="@Url.Action("ProductByBrandId", new { id = Model.ListProduct.FirstOrDefault()?.Brand_id, page = currentPage + 1 })" aria-label="Next">
+                        Trang tiếp <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
+
+        <!-- Các phần còn lại của view -->
+    </div> <!-- container .//  -->
+</section>
+<!-- ========================= SECTION CONTENT END// ========================= -->

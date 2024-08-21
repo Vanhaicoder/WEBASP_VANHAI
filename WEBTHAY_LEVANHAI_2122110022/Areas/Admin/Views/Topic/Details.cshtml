@@ -1,0 +1,50 @@
+﻿@model WEBTHAY_LEVANHAI_2122110022.Models.Topic
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<div class="content-wrapper">
+    <div>
+        <h4>Chủ đề</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Name)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Name)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Slug)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Slug)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Description)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Description)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Status)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Status)
+            </dd>
+
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Sửa", "Edit", new { id = Model.Topic_id }) |
+        @Html.ActionLink("Quay lại", "Index")
+    </p>
+</div>

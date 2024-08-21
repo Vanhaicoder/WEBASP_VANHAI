@@ -11,7 +11,8 @@ namespace WEBTHAY_LEVANHAI_2122110022.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations.Schema;
+
     public partial class Brand
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -28,5 +29,7 @@ namespace WEBTHAY_LEVANHAI_2122110022.Models
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Product> Products { get; set; }
+        [NotMapped]
+        public System.Web.HttpPostedFileBase ImageUpload { get; set; }
     }
 }

@@ -12,7 +12,6 @@ namespace WEBTHAY_LEVANHAI_2122110022.Models
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations.Schema;
-    using System.Web;
 
     public partial class Banner
     {
@@ -24,6 +23,6 @@ namespace WEBTHAY_LEVANHAI_2122110022.Models
         public string Description { get; set; }
         public byte Status { get; set; }
         [NotMapped]
-        public HttpPostedFileBase ImageUpload { get; set; }
+        public System.Web.HttpPostedFileBase ImageUpload { get; set; }
     }
 }

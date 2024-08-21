@@ -11,20 +11,20 @@
         <nav class="row">
             @foreach (var item in Model)
             {
-                <div class="col-md-3" >
+                <div class="col-md-3">
                     <div class="card card-category">
                         <div class="img-wrap">
                             <a href="@Url.Action("ProductByCategoryId", "Category", new { id = item.id })">
-                                <img src="~/Content/images/items/@item.Image" alt="@item.name">
+                                <img src="~/Content/images/categories/@item.Image" alt="@item.name">
                             </a>
                         </div>
                         <div class="card-body">
                             <h4 class="card-title"><a href="#">@Html.ActionLink(item.name, "ProductByCategoryId", "Category", new { id = item.id }, null)</a></h4>
                             <ul class="list-menu">
                                 @*@foreach (var item2 in Model)
-                                {
-                                    <li><a href="">@Html.DisplayFor(modelItem => item2.name)</a></li>
-                                }*@
+                                    {
+                                        <li><a href="">@Html.DisplayFor(modelItem => item2.name)</a></li>
+                                    }*@
                             </ul>
                         </div>
                     </div>
@@ -60,5 +60,7 @@
 
 
     </div>
+
 </section>
 <!-- ========================= SECTION SUBSCRIBE END// ========================= -->
+<a href="@Url.Action("Index","Home")" class="btn btn-light"> &laquo Quay lại </a>

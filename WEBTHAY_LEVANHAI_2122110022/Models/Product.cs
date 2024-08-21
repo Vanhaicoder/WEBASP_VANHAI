@@ -38,7 +38,6 @@ namespace WEBTHAY_LEVANHAI_2122110022.Models
         public virtual Category Category { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Orderdetail> Orderdetails { get; set; }
-
         [NotMapped]
         public System.Web.HttpPostedFileBase ImageUpload { get; set; }
     }
